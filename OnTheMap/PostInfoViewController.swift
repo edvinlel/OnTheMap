@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class PostInfoViewController: UIViewController, MKMapViewDelegate {
+class PostInfoViewController: UIViewController, MKMapViewDelegate, UITextFieldDelegate {
 	
 	@IBOutlet weak var mapView: MKMapView!
 	@IBOutlet weak var locationTextField: UITextField!
@@ -23,9 +23,15 @@ class PostInfoViewController: UIViewController, MKMapViewDelegate {
         super.viewDidLoad()
 
         mapView.delegate = self
+		locationTextField.delegate = self
+		
+		let tap = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+		view.addGestureRecognizer(tap)
     }
 
-	
+	@objc private func hideKeyboard() {
+		view.endEditing(true)
+	}
 	
 	private func post(mapString: String, location: CLLocation, mediaURL: String?) {
 		guard let mediaURL = mediaURL else {
@@ -115,5 +121,11 @@ class PostInfoViewController: UIViewController, MKMapViewDelegate {
 				}
 			}
 		})
+	}
+	
+	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+		locationTextField.resignFirstResponder()
+		
+		return true
 	}
 }

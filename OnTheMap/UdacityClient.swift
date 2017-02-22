@@ -41,6 +41,8 @@ class UdacityClient {
 		
 		return task
 	}
+
+
 	
 	func taskForPostMethod(method: String, parameters: [String: AnyObject]?, completionHandlerForPost: @escaping ( _ result: AnyObject?, _ error: NSError?) -> Void) -> URLSessionTask {
 		let url = UdacityConstants.URL + method
@@ -48,20 +50,24 @@ class UdacityClient {
 		request.httpMethod = "POST"
 		request.addValue("application/json", forHTTPHeaderField: "Content-Type")
 		request.addValue("application/json", forHTTPHeaderField: "Accept")
-		
+
 		do {
 			request.httpBody = try JSONSerialization.data(withJSONObject: parameters!, options: .prettyPrinted)
 		} catch let err as NSError {
-			request.httpBody = nil
+			
 			completionHandlerForPost(nil, err)
+			
 		}
+		
 		let task = URLSession.shared.dataTask(with: request as URLRequest) { (data, response, error) in
 			guard error == nil else {
 				print("error in taskForPostMethod")
+				//completionHandlerForPost(nil, error as NSError?)
 				return
 			}
 			
 			guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
+				completionHandlerForPost(nil, error as NSError?)
 				print("Your request returned a status code other than 2xx!")
 				return
 			}

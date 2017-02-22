@@ -10,6 +10,8 @@ import Foundation
 
 extension UdacityClient {
 	
+
+	
 	func getSessionId(parameters: [String: AnyObject]?, completionHandlerForSession: @escaping (_ success: Bool, _ error: NSError?) -> Void) {
 		
 		let _ = self.taskForPostMethod(method: Methods.Session, parameters: parameters!) { (results, error) in
