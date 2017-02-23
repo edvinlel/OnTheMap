@@ -28,7 +28,6 @@
 		066E802F1E429E1600E6F93C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 066E802E1E429E1600E6F93C /* MapKit.framework */; };
 		066E80311E42D48400E6F93C /* StudentAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066E80301E42D48400E6F93C /* StudentAnnotation.swift */; };
 		066E80331E42E58800E6F93C /* StudentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066E80321E42E58800E6F93C /* StudentCell.swift */; };
-		066E80351E430A0600E6F93C /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066E80341E430A0600E6F93C /* WebViewController.swift */; };
 		066E80371E43199700E6F93C /* PostInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066E80361E43199700E6F93C /* PostInfoViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -68,7 +67,6 @@
 		066E802E1E429E1600E6F93C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		066E80301E42D48400E6F93C /* StudentAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentAnnotation.swift; sourceTree = "<group>"; };
 		066E80321E42E58800E6F93C /* StudentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentCell.swift; sourceTree = "<group>"; };
-		066E80341E430A0600E6F93C /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		066E80361E43199700E6F93C /* PostInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostInfoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -140,7 +138,6 @@
 				0607C49E1E1DC505000D84AB /* LoginViewController.swift */,
 				063F01591E3969EC00D7A9C8 /* MapViewController.swift */,
 				066E80271E41685000E6F93C /* ListViewController.swift */,
-				066E80341E430A0600E6F93C /* WebViewController.swift */,
 				066E80361E43199700E6F93C /* PostInfoViewController.swift */,
 			);
 			name = Controller;
@@ -316,7 +313,6 @@
 				063F01631E3AC18E00D7A9C8 /* Students.swift in Sources */,
 				063F015A1E3969EC00D7A9C8 /* MapViewController.swift in Sources */,
 				066E80311E42D48400E6F93C /* StudentAnnotation.swift in Sources */,
-				066E80351E430A0600E6F93C /* WebViewController.swift in Sources */,
 				066E80281E41685000E6F93C /* ListViewController.swift in Sources */,
 				0607C4C21E2560BF000D84AB /* UdacityConstants.swift in Sources */,
 			);

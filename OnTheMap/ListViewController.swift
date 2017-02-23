@@ -78,12 +78,10 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 			return
 		}
 		
-		let webController = storyboard?.instantiateViewController(withIdentifier: "WebVC") as! WebViewController
+		
 		
 		if Verify.verifyURL(address: mediaURL) {
-			webController.url = mediaURL
-			
-			present(webController, animated: true, completion: nil)
+			UIApplication.shared.open(URL(string: mediaURL)!, options: [:], completionHandler: nil)
 		} else {
 			Alert.showAlert(title: "Error", message: AlertMessages.urlError.rawValue, viewController: self)
 		}

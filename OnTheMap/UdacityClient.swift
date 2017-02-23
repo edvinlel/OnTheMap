@@ -69,7 +69,7 @@ class UdacityClient {
 			guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
 				let statusCode = (response as? HTTPURLResponse)?.statusCode
 				
-				let err = NSError.init(domain:"\(statusCode)", code: statusCode!, userInfo: nil)
+				let err = NSError.init(domain:"Invalid user credentials.", code: statusCode!, userInfo: nil)
 				completionHandlerForPost(nil, err)
 				print("Your request returned a status code other than 2xx!")
 				return

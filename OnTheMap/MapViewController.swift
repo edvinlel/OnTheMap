@@ -130,9 +130,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 		let student = view.annotation as! StudentAnnotation
 		let studentURL = student.subtitle
 		if Verify.verifyURL(address: studentURL) {
-			let webController = storyboard?.instantiateViewController(withIdentifier: "WebVC") as! WebViewController
-			webController.url = studentURL
-			present(webController, animated: true, completion: nil)
+			UIApplication.shared.open(URL(string: studentURL!)!, options: [:], completionHandler: nil)
 		} else {
 			Alert.showAlert(title: "Error", message: AlertMessages.urlError.rawValue, viewController: self)
 		}

@@ -17,11 +17,19 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view, typically from a nib.
 		
+		
 		usernameTextField.delegate = self
 		passwordTextField.delegate = self	
 
 		let tap = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
 		view.addGestureRecognizer(tap)
+	}
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		
+		usernameTextField.text = ""
+		passwordTextField.text = ""
 	}
 	
 	@objc private func hideKeyboard() {
@@ -46,7 +54,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 				} else {
 					// send an error message to the user about a problem with getting users data from the database
 					DispatchQueue.main.async {
-						Alert.showAlert(title: AlertMessages.error.rawValue, message: AlertMessages.loginError.rawValue, viewController: self)
+						Alert.showAlert(title: AlertMessages.error.rawValue, message: (error?.localizedDescription)!, viewController: self)
+//						Alert.showAlert(title: AlertMessages.error.rawValue, message: AlertMessages.loginError.rawValue, viewController: self)
 					}
 				}
 			}
