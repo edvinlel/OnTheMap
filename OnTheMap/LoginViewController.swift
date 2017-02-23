@@ -55,7 +55,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 					// send an error message to the user about a problem with getting users data from the database
 					DispatchQueue.main.async {
 						Alert.showAlert(title: AlertMessages.error.rawValue, message: (error?.localizedDescription)!, viewController: self)
-//						Alert.showAlert(title: AlertMessages.error.rawValue, message: AlertMessages.loginError.rawValue, viewController: self)
 					}
 				}
 			}
