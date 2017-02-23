@@ -22,8 +22,6 @@ class WebViewController: UIViewController, UIWebViewDelegate {
 
         webView.delegate = self
 		
-		activityIndicator.startAnimating()
-		
 		guard let url = url else {
 			print("error getting url")
 			return

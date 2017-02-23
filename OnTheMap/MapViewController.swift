@@ -43,7 +43,10 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 	@IBAction func onLogoutButtonPressed(_ sender: UIButton) {
 		UdacityClient.sharedInstance().logOut { (success, error) in
 			if success {
-				self.dismiss(animated: true, completion: nil)
+				DispatchQueue.main.async {
+					self.dismiss(animated: true, completion: nil)
+				}
+				
 			}
 		}
 	}
@@ -88,10 +91,13 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 		ParseClient.sharedInstance().getStudentLocations { (results, success, error) in
 			DispatchQueue.main.async {
 				if success {
-					let students = ParseClient.sharedInstance().studentArray
+					let students = StudentDataSource.sharedInstance.studentData
 					self.addAnnotationsFor(students: students)
 				} else {
-					Alert.showAlert(title: AlertMessages.error.rawValue, message: AlertMessages.studentLocationsError.rawValue, viewController: self)
+					DispatchQueue.main.async {
+						Alert.showAlert(title: AlertMessages.error.rawValue, message: (error?.localizedDescription)!, viewController: self)						
+					}
+					
 				}
 			}
 		}

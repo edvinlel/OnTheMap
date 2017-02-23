@@ -15,10 +15,8 @@ extension UdacityClient {
 	func getSessionId(parameters: [String: AnyObject]?, completionHandlerForSession: @escaping (_ success: Bool, _ error: NSError?) -> Void) {
 		
 		let _ = self.taskForPostMethod(method: Methods.Session, parameters: parameters!) { (results, error) in
-			guard error == nil else {
-				print("We had an error in getSessionId")
+			if error != nil {
 				completionHandlerForSession(false, error)
-				return
 			}
 			
 			guard let account = results?[JSONResponseKeys.Account] as? [String: AnyObject] else {

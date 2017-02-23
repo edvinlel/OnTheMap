@@ -37,7 +37,9 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 	@IBAction func onLogoutButtonPressed(_ sender: UIButton) {
 		UdacityClient.sharedInstance().logOut { (success, error) in
 			if success {
-				self.dismiss(animated: true, completion: nil)
+				DispatchQueue.main.async {
+					self.dismiss(animated: true, completion: nil)
+				}
 			}
 		}
 	}
@@ -45,13 +47,13 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 	// MARK: UITableViewDelegate/DataSource
 
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return ParseClient.sharedInstance().studentArray.count
+		return StudentDataSource.sharedInstance.studentData.count
 	}
  
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! StudentCell
 		
-		let student = ParseClient.sharedInstance().studentArray[indexPath.row]
+		let student = StudentDataSource.sharedInstance.studentData[indexPath.row]
 		
 		if student.firstName == "" || student.lastName == "" {
 			cell.fullNameLabel?.text = "Oops! No Name"
@@ -70,7 +72,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		let student = ParseClient.sharedInstance().studentArray[indexPath.row]
+		let student = StudentDataSource.sharedInstance.studentData[indexPath.row]
 		
 		guard let mediaURL = student.mediaURL else {
 			return
@@ -97,7 +99,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 					self.tableView.reloadData()
 					
 				} else {
-					Alert.showAlert(title: "Error", message: AlertMessages.studentLocationsError.rawValue, viewController: self)
+					Alert.showAlert(title: "Error", message: (error?.localizedDescription)!, viewController: self)
 				}
 			}
 		}

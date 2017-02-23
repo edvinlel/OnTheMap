@@ -24,7 +24,7 @@ extension ParseClient {
 			guard let results = results?[JSONResponseKeys.Results] as? [[String: AnyObject]] else {
 				return
 			}
-			self.studentArray = Students.studentsFromResults(results: results)
+			StudentDataSource.sharedInstance.studentData = Students.studentsFromResults(results: results)
 		
 			
 			

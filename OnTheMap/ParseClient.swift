@@ -9,8 +9,6 @@
 import Foundation
 
 class ParseClient {
-	// Store students from parsed data to pass around other view controllers
-	var studentArray: [Students] = []
 	
 	func taskForGetMethod(method: String?, completionHandlerForGet: @escaping (_ results: AnyObject?, _ error: NSError?) -> Void) -> URLSessionTask {
 		var url = ""
@@ -25,6 +23,7 @@ class ParseClient {
 		let session = URLSession.shared
 		let task = session.dataTask(with: request as URLRequest) { data, response, error in
 			if error != nil { // Handle error...
+				completionHandlerForGet(nil, error as? NSError)
 				return
 			}
 			
@@ -57,15 +56,14 @@ class ParseClient {
 		
 		do {
 			request.httpBody = try JSONSerialization.data(withJSONObject: body, options: .prettyPrinted)
-		} catch {
-			request.httpBody = nil
-			completionHandlerForPost(false, error as NSError?)
+		} catch let err as NSError {
+			completionHandlerForPost(false, err)
 		}
 		
 		let session = URLSession.shared
 		let task = session.dataTask(with: request as URLRequest) { data, response, error in
 			if error != nil { // Handle error…
-				completionHandlerForPost(false, error as NSError?)
+				completionHandlerForPost(false, error as? NSError)
 				return
 			}
 			completionHandlerForPost(true, nil)

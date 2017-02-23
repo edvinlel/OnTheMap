@@ -26,11 +26,14 @@ struct Verify {
 
 enum AlertMessages: String {
 	case error = "Error"
-	case emptyTextFieldError = "Text fields cannot be empty."
+	case emptyTextFieldError = "Text fields cannot be empty"
 	case studentLocationsError = "Error getting student locations."
 	case postingError = "Error posting your information to the servers."
 	case urlError = "Error verifying your url."
-	
+	case locationError = "Error finding location."
+	case postInfoError = "Error posting location to server."
+	case loginError = "Invalid Credentials/Error connecting with the server. Please try again."
+	case offlineError = "The Internet connection appears to be offline."
 }
 
 struct Alert {

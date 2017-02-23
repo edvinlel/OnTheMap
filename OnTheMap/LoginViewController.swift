@@ -18,11 +18,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 		// Do any additional setup after loading the view, typically from a nib.
 		
 		usernameTextField.delegate = self
-		passwordTextField.delegate = self
-		
-//		NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-//		NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-//		
+		passwordTextField.delegate = self	
 
 		let tap = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
 		view.addGestureRecognizer(tap)
@@ -36,15 +32,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 		// Make sure text fields are not empty before moving forward; if empty, prompt error alert
 		if usernameTextField.text != "" && passwordTextField.text != "" {
 			let param = ["udacity" : ["username" : "\(usernameTextField.text!)", "password" : "\(passwordTextField.text!)"]]
-
-		
 			
 			UdacityClient.sharedInstance().getSessionId(parameters: param as [String: AnyObject]) { (success, error) in
-				if error != nil {
-					print("hellooooooo: fail")
-				} else {
-					print("hellooooooo: success")
-				}
+				
 				if success {
 					// Store the logged in users information
 					UdacityClient.sharedInstance().getUserData()
@@ -55,14 +45,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 					}
 				} else {
 					// send an error message to the user about a problem with getting users data from the database
-					print("FALSEEEEEEEEEEEEE")
-					let errorMessage = "/(error?.localizedDescription)"
-					print(errorMessage)
-					let alert = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .alert)
-					let action = UIAlertAction(title: "Ok", style: .default, handler: nil)
-					alert.addAction(action)
 					DispatchQueue.main.async {
-						self.present(alert, animated: true, completion: nil)
+						Alert.showAlert(title: AlertMessages.error.rawValue, message: AlertMessages.loginError.rawValue, viewController: self)
 					}
 				}
 			}
@@ -71,31 +55,15 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 		}
 	}
 	
-//	@objc func keyboardWillShow(notification: NSNotification) {
-//		
-//		if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-//			self.view.frame.origin.y -= keyboardSize.height
-//		}
-//		
-//	}
-//	
-//	func keyboardWillHide(notification: NSNotification) {
-//		if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-//			self.view.frame.origin.y += keyboardSize.height
-//		}
-//	}
-	
-//	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-//		if textField == usernameTextField {
-//			passwordTextField.becomeFirstResponder()
-//			view.frame.origin.y -= 100
-//		} else {
-//			passwordTextField.resignFirstResponder()
-//			view.frame.origin.y += 100
-//		}
-//		
-//		return true
-//	}
+	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+		if textField == usernameTextField {
+			passwordTextField.becomeFirstResponder()
+		} else {
+			view.endEditing(true)
+		}
+		
+		return true
+	}
 	
 }
 
